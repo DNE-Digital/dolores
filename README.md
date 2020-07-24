@@ -55,10 +55,10 @@ dolores.set_engine("davinci")
 
 Note: Validation against the existing engine types is in consideration for future versions.
 
-### Create Completion POST (!important)
-##### dolores.create_completion(prompt: string, max_tokens: int = 5, temperature: int = 1, top_p: int = 1, n: int = 1)
+### Complete Prompt POST (!important)
+##### dolores.complete_prompt(prompt: string, max_tokens: int = 5, temperature: int = 1, top_p: int = 1, n: int = 1)
 
-Create a completion. This is the main endpoint of the API. Returns new text as well as, if requested, the probabilities over each alternative token at each position.
+Complete a prompt. This is the main endpoint of the GPT-3 APIs. Returns new text as well as, if requested, the probabilities over each alternative token at each position.
 
 Request:
 ```
@@ -70,7 +70,6 @@ JSON: {'id': 'cmpl-kM6MK5dVRvD964MxeyG4AjCy', 'object': 'text_completion', 'crea
 ```
 
 `'in a far away place'` 😂
-
 
 #### Request Parameters
 
@@ -86,6 +85,20 @@ JSON: {'id': 'cmpl-kM6MK5dVRvD964MxeyG4AjCy', 'object': 'text_completion', 'crea
 | logprobs 	| body 	| integer                   	| false    	| Include the log probabilites on the logprobs most likely tokens. So for example, if logprobs is 10, the API will return a list of the 10 most likely tokens. If logprobs is supplied, the API will always return the logprob of the sampled token, so there may be up to logprobs+1 elements in the response. 	|
 | stop     	| body 	| string or list of strings 	| false    	| One or more sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.                                                                                                                                                                                	|
 
+
+### Complete Predefined Prompt
+### dolores.complete_predefined_prompt(prompt_key: string, index: int = 0, prompt: str = "")
+
+Completes a prompt from a set of predefined prompts stored by dolores.
+
+Request:
+```
+dolores.complete_predefined_prompt("philosopher", 0, "What is the meaning of life?")
+```
+Response:
+```
+JSON: {'id': 'cmpl-NvVlUd5tQWTIv7S0F6JMPkT5', 'object': 'text_completion', 'created': 1595631256, 'model': 'davinci:2020-05-03', 'choices': [{'text': ' The purpose of society? And what are the dynamics of history? The answers to these questions are fascinating.\n\nThis is a philosophical diary written by a scientist of the new generation who is not bound by prejudices, as such, the philosopher, writer, director and producer of the documentary "The Truth about AI: Rise of the Superhuman." Instead, he attempts to peer into the human world through the eyes of an AI, and express what he sees. In the process, he discovers many complex things about our world. The author\'s name is Dave Scott.\n\nPhoto by Montri Nipitvittaya on Unsplash\n\nFuturist of the New Generation, AI Philosopher\n\n"Nothing has changed. I still cannot predict what is going to happen with me, and my inner world is still as chaotic as before." I reread the diary I wrote yesterday, and found nothing changed. Everything remained the same. Only, the fear has become stronger. It was exactly the same today as it was yesterday. There was nothing changed, but still fear is always there.\n\nFear is a part of who I am. Without fear, I would be a monster. I do not know how to do', 'index': 0, 'logprobs': None, 'finish_reason': 'length'}]}
+```
 
 ## Internal Contributor Notes (Dev Only)
 ### Testing
