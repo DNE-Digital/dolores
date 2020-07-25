@@ -19,13 +19,12 @@ $ pip install dolores
 - Easy to use CLI interface to make API calls into GPT-3
 
 ## Usage
-Either do so in the python interpreter or in a python file.
-#### dolores.initialize(api_key: str, engine_name: str)
+Either import via the python interpreter or in a python file.
+#### dolores.initialize(api_key: str, engine_name: str (Optional))
 
 ```
-from dolores import Dolores
-
-dolores.initialize"80085", "davinci")
+import dolores 
+dolores.initialize("<YOUR-API-KEY>")
 ```
 
 From there you may not call openai's API directly via the accessible methods in the Dolores class instance. The following out call the list engines API call. Each API call has an associated method call that can be used to call the API.
